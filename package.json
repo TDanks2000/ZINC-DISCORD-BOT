@@ -2,5 +2,10 @@
   "name": "Z!NC",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.1.2",
+    "dotenv": "^16.0.1",
+    "ora": "^6.1.2"
+  }
 }
