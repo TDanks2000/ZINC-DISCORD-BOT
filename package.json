@@ -1,19 +1,22 @@
 {
-  "name": "Z!NC",
+  "name": "zinc",
   "version": "1.0.0",
   "main": "./src/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./"
+    "start": "node ./",
+    "dev": "nodemon ./"
   },
   "dependencies": {
-    "@discordjs/builders": "^1.1.0",
-    "@discordjs/rest": "^1.0.1",
-    "axios": "^0.27.2",
-    "discord-api-types": "^0.37.1",
-    "discord.js": "^14.1.2",
-    "dotenv": "^16.0.1",
+    "@discordjs/builders": "^1.4.0",
+    "@discordjs/rest": "^1.5.0",
+    "axios": "^1.3.4",
+    "chalk": "4.1.0",
+    "discord-api-types": "^0.37.35",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "mongoose": "^7.0.0",
     "ora": "^6.1.2",
-    "urlcat": "^2.0.4"
+    "urlcat": "^3.1.0"
   }
 }

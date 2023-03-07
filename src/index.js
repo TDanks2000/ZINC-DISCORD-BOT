@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const fs = require("fs");
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const connectToMongoDB = require("./utils/mongoDBConnect");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const TOKEN = process.env.CLIENT_TOKEN;
@@ -21,7 +22,9 @@ const commandsFolders = fs.readdirSync("./src/commands");
     require(`./functions/${file}`)(client);
   }
 
-  client.handleEvents(eventFiles, "./src/events");
-  client.handleCommands(commandsFolders, "./src/commands");
-  client.login(TOKEN);
+  await client.handleEvents(eventFiles, "./src/events");
+  await client.handleCommands(commandsFolders, "./src/commands");
+  await client.login(TOKEN);
+
+  await connectToMongoDB();
 })();

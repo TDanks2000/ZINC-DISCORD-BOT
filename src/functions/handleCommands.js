@@ -1,4 +1,5 @@
 const { REST } = require("@discordjs/rest");
+const chalk = require("chalk");
 const { Routes } = require("discord.js");
 const fs = require("node:fs");
 
@@ -26,13 +27,17 @@ module.exports = (client) => {
 
     (async () => {
       try {
-        console.log("Started refreshing application (/) commands.");
+        console.log(
+          chalk.cyan(`[Z!NC] Started refreshing application (/) commands.`)
+        );
 
         await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
           body: client.commandArray,
         });
 
-        console.log("Successfully reloaded application (/) commands.");
+        console.log(
+          chalk.green(`[Z!NC] Successfully reloaded application (/) commands.`)
+        );
       } catch (error) {
         console.error(error);
       }
