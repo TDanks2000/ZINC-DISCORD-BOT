@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const { Types } = require("mongoose");
 const Balance = require("../../schemas/balance");
 
 module.exports = (client) => {
@@ -10,10 +10,11 @@ module.exports = (client) => {
 
     if (!storedBal) {
       storedBal = await new Balance({
-        _id: mongoose.Types.ObjectId(),
+        _id: new Types.ObjectId(),
         userID,
         guildID,
       });
+
       await storedBal.save().catch((err) => console.log(err));
       return storedBal;
     } else return storedBal;
