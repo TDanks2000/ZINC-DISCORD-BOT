@@ -30,8 +30,8 @@ module.exports = {
     const { data } = await api.get(`/${animal_name}`);
 
     const embed = new EmbedBuilder()
-      .setColor("#b8792c")
       .setTitle(animal_name)
+      .setColor(client.color)
       .setImage(data.image)
       .setDescription(data.fact)
       .setTimestamp();

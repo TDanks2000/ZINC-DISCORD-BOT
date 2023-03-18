@@ -14,6 +14,7 @@ const client = new Client({
 
 const TOKEN = process.env.CLIENT_TOKEN;
 
+client.color = "#7d5fff";
 client.commands = new Collection();
 
 const functionFolder = fs.readdirSync("./src/functions");

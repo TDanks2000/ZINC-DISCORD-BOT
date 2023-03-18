@@ -7,7 +7,11 @@ module.exports = {
     if (message.author.bot) return;
 
     try {
+      const shallGive = Math.random() < 0.5;
       const randomBal = Math.random() * (0.7 - 0.3) + 0.3;
+
+      if (!shallGive) return;
+
       const storedBal = await client.fetchBal(
         message.author.id,
         message.guild.id
