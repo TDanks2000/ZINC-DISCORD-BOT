@@ -32,7 +32,7 @@ module.exports = (client) => {
           chalk.cyan(`[Z!NC] Started refreshing application (/) commands.`)
         );
 
-        await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+        await rest.put(Routes.applicationCommands(clientId), {
           body: client.commandArray,
         });
 

@@ -37,6 +37,18 @@ module.exports = (client) => {
                 );
             }
             break;
+          case "distube":
+            for (const file of eventFiles) {
+              const event = require(`../../events/${folder}/${file}`);
+              if (event.once)
+                client.distube.once(event.name, (...args) =>
+                  event.execute(...args, client)
+                );
+              else
+                client.distube.on(event.name, (...args) =>
+                  event.execute(...args, client)
+                );
+            }
           default:
             break;
         }
