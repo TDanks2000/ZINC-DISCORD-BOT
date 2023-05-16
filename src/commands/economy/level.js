@@ -33,7 +33,7 @@ module.exports = {
 
     const rankCard = new canvacord.Rank()
       .setAvatar(interaction.user.displayAvatarURL({ dynamic: false }))
-      .setCurrentXP(level.xp ?? 0)
+      .setCurrentXP(level?.xp ?? 0)
       .setRequiredXP(calculateLevelXp(level.level) ?? 9)
       .setStatus(member?.presence?.status ?? "offline")
       .setProgressBar(client.color, "COLOR")
