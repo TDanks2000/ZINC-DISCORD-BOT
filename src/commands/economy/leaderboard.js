@@ -31,7 +31,7 @@ module.exports = {
     const maxItems = 10;
 
     const embed = new EmbedBuilder()
-      .setTitle(`Z!NC || ${interaction.guild.name}'s level leaderboard`)
+      .setTitle(`Z!NC | ${interaction.guild.name}'s level leaderboard`)
       .setDescription(await leaderboard(sorted, interaction))
       .setColor(client.color)
       .setFooter({ text: `Requested by ${interaction.user.tag}` })
