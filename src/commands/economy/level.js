@@ -35,15 +35,13 @@ module.exports = {
       .setAvatar(interaction.user.displayAvatarURL({ dynamic: false }))
       .setCurrentXP(level.xp)
       .setRequiredXP(calculateLevelXp(level.level))
-      .setStatus("dnd")
+      .setStatus(member?.presence?.status ?? "offline")
       .setProgressBar(client.color, "COLOR")
       .setUsername(interaction.user.username)
       .setDiscriminator(interaction.user.discriminator);
 
     const data = await rankCard.build();
-    const attachment = new AttachmentBuilder(data, {
-      name: "rankcard.png",
-    });
+    const attachment = new AttachmentBuilder(data);
 
     await interaction.reply({ files: [attachment] });
   },
