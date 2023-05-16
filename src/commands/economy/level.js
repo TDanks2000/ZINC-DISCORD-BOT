@@ -19,6 +19,7 @@ module.exports = {
    */
   async execute(interaction, client) {
     const user = interaction.options.getUser("user") || interaction.user;
+    const member = await interaction.guild.members.fetch(user);
 
     const query = {
       userId: user.id,
@@ -31,7 +32,7 @@ module.exports = {
       .setAvatar(interaction.user.displayAvatarURL({ dynamic: false }))
       .setCurrentXP(level.xp)
       .setRequiredXP(calculateLevelXp(level.level))
-      .setStatus(interaction.member.presence)
+      .setStatus(member.presence.status)
       .setProgressBar(client.color, "COLOR")
       .setUsername(interaction.user.username)
       .setDiscriminator(interaction.user.discriminator);
