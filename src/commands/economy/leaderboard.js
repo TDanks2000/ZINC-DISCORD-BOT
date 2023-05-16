@@ -38,9 +38,14 @@ module.exports = {
           .map(async (data, index) => {
             //find member in guild
             const member = await interaction.guild.members.fetch(data.userId);
-            return `**${index + 1}.** <@${member.user.id}> - Level: ${
-              data.level
-            } - XP: ${data.xp}`;
+
+            const promise = await new new Promise((resolve, reject) => {
+              `**${index + 1}.** <@${member.user.id}> - Level: ${
+                data.level
+              } - XP: ${data.xp}`;
+            })();
+
+            return promise;
           })
           .join("\n")
       )
