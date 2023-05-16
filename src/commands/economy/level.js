@@ -35,7 +35,7 @@ module.exports = {
       .setAvatar(interaction.user.displayAvatarURL({ dynamic: false }))
       .setCurrentXP(level?.xp ?? 0)
       .setRequiredXP(calculateLevelXp(level?.level))
-      .setLevel(level?.level ?? 1)
+      .setLevel(level?.level ?? 0)
       .setStatus(member?.presence?.status ?? "offline")
       .setProgressBar(client.color, "COLOR")
       .setUsername(interaction.user.username)
