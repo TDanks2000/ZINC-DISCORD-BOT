@@ -2,7 +2,7 @@ const { Client, Message } = require("discord.js");
 const Level = require("../../schemas/level");
 const calculateLevelXp = require("../../utils/calculateLevelXp");
 
-const cooldowns = new Map();
+const cooldowns = [];
 
 /**
  *
@@ -15,7 +15,7 @@ module.exports = (client) => {
    */
   client.giveUserXp = async (message) => {
     if (
-      cooldowns.has({
+      cooldowns.includes({
         id: message.author.id,
         guild: message.guild.id,
       })
@@ -44,16 +44,17 @@ module.exports = (client) => {
           return console.log(err);
         });
 
-        cooldowns.add({
+        cooldowns.push({
           id: message.author.id,
           guild: message.guild.id,
         });
 
         setTimeout(() => {
-          cooldowns.delete({
+          const index = cooldowns.indexOf({
             id: message.author.id,
             guild: message.guild.id,
           });
+          cooldowns.splice(index, 1);
         }, 60 * 1000);
       }
 
@@ -69,16 +70,17 @@ module.exports = (client) => {
           return console.log(err);
         });
 
-        cooldowns.add({
+        cooldowns.push({
           id: message.author.id,
           guild: message.guild.id,
         });
 
         setTimeout(() => {
-          cooldowns.delete({
+          const index = cooldowns.indexOf({
             id: message.author.id,
             guild: message.guild.id,
           });
+          cooldowns.splice(index, 1);
         }, 60 * 1000);
       }
     } catch (error) {
