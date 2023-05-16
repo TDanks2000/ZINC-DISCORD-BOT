@@ -32,7 +32,7 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setTitle("Leaderboard")
-      .setDescription(leaderboard(sorted, interaction).then((items) => items))
+      .setDescription(await leaderboard(sorted, interaction))
       .setColor(client.color)
       .setFooter({ text: `Requested by ${interaction.user.tag}` })
       .setTimestamp();
@@ -42,16 +42,20 @@ module.exports = {
 };
 
 const leaderboard = async (items, interaction) => {
-  const returnData = await items
-    .slice(0, 10)
-    .map(async (data, index) => {
-      const member = await interaction.guild.members.fetch(data.userId);
+  const returnData = await new Promise((resolve, reject) => {
+    resolve(
+      items
+        .slice(0, 10)
+        .map(async (data, index) => {
+          const member = await interaction.guild.members.fetch(data.userId);
 
-      return `**${index + 1}.** <@${member.user.id}> - Level: ${
-        data.level
-      } - XP: ${data.xp}`;
-    })
-    .join("\n");
+          return `**${index + 1}.** <@${member.user.id}> - Level: ${
+            data.level
+          } - XP: ${data.xp}`;
+        })
+        .join("\n")
+    );
+  });
 
   return returnData;
 };
