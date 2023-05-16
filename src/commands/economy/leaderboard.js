@@ -33,18 +33,16 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setTitle("Leaderboard")
       .setDescription(
-        await Promise.all(
-          sorted
-            .splice(0, maxItems)
-            .map(async (data, index) => {
-              //find member in guild
-              const member = await interaction.guild.members.fetch(data.userId);
-              return `**${index + 1}.** <@${member.user.id}> - Level: ${
-                data.level
-              } - XP: ${data.xp}`;
-            })
-            .join("\n")
-        )
+        await sorted
+          .splice(0, maxItems)
+          .map(async (data, index) => {
+            //find member in guild
+            const member = await interaction.guild.members.fetch(data.userId);
+            return `**${index + 1}.** <@${member.user.id}> - Level: ${
+              data.level
+            } - XP: ${data.xp}`;
+          })
+          .join("\n")
       )
       .setColor(client.color)
       .setFooter({ text: `Requested by ${interaction.user.tag}` })
