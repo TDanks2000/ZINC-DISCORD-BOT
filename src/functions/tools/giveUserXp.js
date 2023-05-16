@@ -14,7 +14,13 @@ module.exports = (client) => {
    * @param {Message} message
    */
   client.giveUserXp = async (message) => {
-    if (cooldowns.has(message.author.id)) return;
+    if (
+      cooldowns.has({
+        id: message.author.id,
+        guild: message.guild.id,
+      })
+    )
+      return;
 
     const xpToGive = getRandomXp(5, 15);
 
@@ -38,10 +44,16 @@ module.exports = (client) => {
           return console.log(err);
         });
 
-        cooldowns.add(message.author.id);
+        cooldowns.add({
+          id: message.author.id,
+          guild: message.guild.id,
+        });
 
         setTimeout(() => {
-          cooldowns.delete(message.author.id);
+          cooldowns.delete({
+            id: message.author.id,
+            guild: message.guild.id,
+          });
         }, 60 * 1000);
       }
 
@@ -57,10 +69,16 @@ module.exports = (client) => {
           return console.log(err);
         });
 
-        cooldowns.add(message.author.id);
+        cooldowns.add({
+          id: message.author.id,
+          guild: message.guild.id,
+        });
 
         setTimeout(() => {
-          cooldowns.delete(message.author.id);
+          cooldowns.delete({
+            id: message.author.id,
+            guild: message.guild.id,
+          });
         }, 60 * 1000);
       }
     } catch (error) {
