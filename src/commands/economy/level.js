@@ -29,11 +29,13 @@ module.exports = {
 
     const level = await Level.findOne(query);
 
+    console.log(member.presence);
+
     const rankCard = new canvacord.Rank()
       .setAvatar(interaction.user.displayAvatarURL({ dynamic: false }))
       .setCurrentXP(level.xp)
       .setRequiredXP(calculateLevelXp(level.level))
-      .setStatus(member.presence.status)
+      .setStatus("dnd")
       .setProgressBar(client.color, "COLOR")
       .setUsername(interaction.user.username)
       .setDiscriminator(interaction.user.discriminator);
