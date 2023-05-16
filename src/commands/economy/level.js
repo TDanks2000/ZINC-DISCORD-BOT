@@ -1,7 +1,7 @@
 const { Client, Interaction } = require("discord.js");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const canvacord = require("canvacord");
-const level = require("../../schemas/level");
+const Level = require("../../schemas/level");
 const calculateLevelXp = require("../../utils/calculateLevelXp");
 const { AttachmentBuilder } = require("discord.js");
 
