@@ -32,7 +32,7 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setTitle("Leaderboard")
-      .setDescription(await leaderboard(sorted, interaction))
+      .setDescription(leaderboard(sorted, interaction).then((items) => items))
       .setColor(client.color)
       .setFooter({ text: `Requested by ${interaction.user.tag}` })
       .setTimestamp();
