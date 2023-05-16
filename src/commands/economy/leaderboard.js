@@ -28,11 +28,13 @@ module.exports = {
       (a, b) => b.level - a.level || b.xp - a.xp
     );
 
+    const maxItems = 10;
+
     const embed = new EmbedBuilder()
       .setTitle("Leaderboard")
       .setDescription(
         sorted
-          .splice(0, 5)
+          .splice(0, maxItems)
           .map(
             (data, index) =>
               `**${index + 1}.** <@${data.userId}> - Level: ${
