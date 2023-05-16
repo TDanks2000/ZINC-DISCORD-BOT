@@ -20,13 +20,14 @@ module.exports = {
   async execute(interaction, client) {
     const user = interaction.options.getUser("user") || interaction.user;
 
-    const level = await Level.findOne({
-      userId: user.id,
-      guildId: interaction.guild.id,
-    });
+    const query = {
+      userId: message.author.id,
+      guildId: message.guild.id,
+    };
 
-    const rankCard = canvacord
-      .Rank()
+    const level = await Level.findOne(query);
+
+    const rankCard = new canvacord.Rank()
       .setAvatar(interaction.user.displayAvatarURL({ dynamic: false }))
       .setCurrentXP(level.xp)
       .setRequiredXP(calculateLevelXp(level.level))
