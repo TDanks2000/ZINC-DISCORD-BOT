@@ -35,12 +35,13 @@ module.exports = {
       .setDescription(
         sorted
           .splice(0, maxItems)
-          .map(
-            (data, index) =>
-              `**${index + 1}.** <@${data.userId}> - Level: ${
-                data.level
-              } - XP: ${data.xp}`
-          )
+          .map(async (data, index) => {
+            //find member in guild
+            const member = await interaction.guild.members.fetch(data.userId);
+            return `**${index + 1}.** <@${member.user.id}> - Level: ${
+              data.level
+            } - XP: ${data.xp}`;
+          })
           .join("\n")
       )
       .setColor(client.color)
