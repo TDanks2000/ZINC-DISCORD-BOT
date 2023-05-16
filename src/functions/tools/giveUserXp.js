@@ -32,8 +32,6 @@ module.exports = (client) => {
         if (level.xp >= calculateLevelXp(level.level)) {
           level.level += 1;
           level.xp = 0;
-
-          message.reply("you have leveld up;");
         }
 
         await level.save().catch((err) => {
