@@ -21,8 +21,8 @@ module.exports = {
     const user = interaction.options.getUser("user") || interaction.user;
 
     const query = {
-      userId: message.author.id,
-      guildId: message.guild.id,
+      userId: user.id,
+      guildId: interaction.guild.id,
     };
 
     const level = await Level.findOne(query);
