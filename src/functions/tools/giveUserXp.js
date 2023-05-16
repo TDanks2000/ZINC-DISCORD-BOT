@@ -2,7 +2,7 @@ const { Client, Message } = require("discord.js");
 const Level = require("../../schemas/level");
 const calculateLevelXp = require("../../utils/calculateLevelXp");
 
-const cooldowns = [];
+const cooldowns = new Set();
 
 /**
  *
@@ -14,13 +14,9 @@ module.exports = (client) => {
    * @param {Message} message
    */
   client.giveUserXp = async (message) => {
-    if (
-      cooldowns.includes({
-        id: message.author.id,
-        guild: message.guild.id,
-      })
-    )
-      return;
+    const id = `${message.guild.id}-${message.author.id}`;
+
+    if (cooldowns.has(id)) return;
 
     const xpToGive = getRandomXp(5, 15);
 
@@ -44,17 +40,10 @@ module.exports = (client) => {
           return console.log(err);
         });
 
-        cooldowns.push({
-          id: message.author.id,
-          guild: message.guild.id,
-        });
+        cooldowns.add(id);
 
         setTimeout(() => {
-          const index = cooldowns.indexOf({
-            id: message.author.id,
-            guild: message.guild.id,
-          });
-          cooldowns.splice(index, 1);
+          cooldowns.delete(id);
         }, 60 * 1000);
       }
 
@@ -70,17 +59,10 @@ module.exports = (client) => {
           return console.log(err);
         });
 
-        cooldowns.push({
-          id: message.author.id,
-          guild: message.guild.id,
-        });
+        cooldowns.add(id);
 
         setTimeout(() => {
-          const index = cooldowns.indexOf({
-            id: message.author.id,
-            guild: message.guild.id,
-          });
-          cooldowns.splice(index, 1);
+          cooldowns.delete(id);
         }, 60 * 1000);
       }
     } catch (error) {
