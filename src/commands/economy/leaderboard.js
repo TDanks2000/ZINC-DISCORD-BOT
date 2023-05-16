@@ -26,9 +26,6 @@ module.exports = {
     // sort levelData by level
     let sorted = await levelData.sort((a, b) => b.level - a.level);
 
-    // sort by xp
-    sorted = await sorted.sort((a, b) => b.xp - a.xp);
-
     const embed = new EmbedBuilder()
       .setTitle("Leaderboard")
       .setDescription(
