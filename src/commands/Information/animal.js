@@ -26,7 +26,7 @@ module.exports = {
       .getString("animal_name")
       .replace(" ", "_");
 
-    const api = axios.create({ baseURL: "https://some-random-api.ml/animal" });
+    const api = axios.create({ baseURL: "https://some-random-api.com/animal" });
     const { data } = await api.get(`/${animal_name}`);
 
     const embed = new EmbedBuilder()

@@ -25,6 +25,8 @@ module.exports = {
           balance: await client.toFixedNumber(storedBal.balance + randomBal, 2),
         }
       );
+
+      client.giveUserXp(message);
     } catch (err) {
       console.log({
         message: `[Z!NC balance] Error`,
