@@ -19,7 +19,6 @@ module.exports = {
           -English Subbed and Dubbed anime series
           -Seamless and intuitive streaming experience
           -Ai-Tools for enhanced convenience
-          -No ads guaranteed!
           
         Join Kato now and let your anime obsession soar to new heights!`
       )
