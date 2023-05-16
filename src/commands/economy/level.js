@@ -32,14 +32,14 @@ module.exports = {
     console.log(member.presence);
 
     const rankCard = new canvacord.Rank()
-      .setAvatar(interaction.user.displayAvatarURL({ dynamic: false }))
+      .setAvatar(member.user.displayAvatarURL({ dynamic: false }))
       .setCurrentXP(level?.xp ?? 0)
       .setRequiredXP(calculateLevelXp(level?.level))
       .setLevel(level?.level ?? 0)
       .setStatus(member?.presence?.status ?? "offline")
       .setProgressBar(client.color, "COLOR")
-      .setUsername(interaction.user.username)
-      .setDiscriminator(interaction.user.discriminator);
+      .setUsername(member.user.username)
+      .setDiscriminator(member.user.discriminator);
 
     const data = await rankCard.build();
     const attachment = new AttachmentBuilder(data);
