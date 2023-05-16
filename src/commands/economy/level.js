@@ -20,7 +20,7 @@ module.exports = {
   async execute(interaction, client) {
     const user = interaction.options.getUser("user") || interaction.user;
 
-    const level = Level.findOne({
+    const level = await Level.findOne({
       userId: user.id,
       guildId: interaction.guild.id,
     });
