@@ -23,7 +23,7 @@ module.exports = {
     const member = await interaction.guild.members.fetch(targetUserId);
 
     const query = {
-      userId: user.id,
+      userId: member.id,
       guildId: interaction.guild.id,
     };
 
