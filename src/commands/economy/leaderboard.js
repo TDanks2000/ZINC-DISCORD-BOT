@@ -42,20 +42,15 @@ module.exports = {
 };
 
 const leaderboard = async (items, interaction) => {
-  const returnData = await new Promise((resolve, reject) => {
-    resolve(
-      items
-        .slice(0, 10)
-        .map(async (data, index) => {
-          const member = await interaction.guild.members.fetch(data.userId);
+  const returnData = await Promise.all(
+    items.slice(0, 10).map(async (data, index) => {
+      const member = await interaction.guild.members.fetch(data.userId);
 
-          return `**${index + 1}.** <@${member.user.id}> - Level: ${
-            data.level
-          } - XP: ${data.xp}`;
-        })
-        .join("\n")
-    );
-  });
+      return `**${index + 1}.** <@${member.user.id}> - Level: ${
+        data.level
+      } - XP: ${data.xp}`;
+    })
+  );
 
-  return returnData;
+  return returnData.join("\n");
 };
