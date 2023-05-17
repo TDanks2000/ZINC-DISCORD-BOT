@@ -25,7 +25,7 @@ module.exports = {
 
     let results = await yts(focusedValue).catch(() => null);
 
-    if (!results?.all) return;
+    if (!results?.all || results?.all?.length < 1) return;
 
     results = results.videos?.slice(0, 25);
 
