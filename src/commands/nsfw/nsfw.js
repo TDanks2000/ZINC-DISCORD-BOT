@@ -12,32 +12,45 @@ module.exports = {
       option
         .setName("nsfw_type")
         .setDescription("The type of nsfw image you want to get.")
-        .addChoices(
-          { name: "hass", value: "hass" },
-          { name: "hmidriff", value: "hmidriff" },
-          { name: "pgif", value: "pgif" },
-          { name: "4k", value: "4k" },
-          { name: "hentai", value: "hentai" },
-          { name: "holo", value: "holo" },
-          { name: "hneko", value: "hneko" },
-          { name: "neko", value: "neko" },
-          { name: "hkitsune", value: "hkitsune" },
-          { name: "kemonomimi", value: "kemonomimi" },
-          { name: "anal", value: "anal" },
-          { name: "hanal", value: "hanal" },
-          { name: "gonewild", value: "gonewild" },
-          { name: "kanna", value: "kanna" },
-          { name: "ass", value: "ass" },
-          { name: "pussy", value: "pussy" },
-          { name: "thigh", value: "thigh" },
-          { name: "hthigh", value: "hthigh" },
-          { name: "paizuri", value: "paizuri" },
-          { name: "tentacle", value: "tentacle" },
-          { name: "boobs", value: "boobs" },
-          { name: "hboobs", value: "hboobs" },
-          { name: "yaoi", value: "yaoi" }
-        )
+        .setAutocomplete(true)
     ),
+  async autocomplete(interaction, client) {
+    if (!interaction.channel.nsfw) return;
+    const focusedValue = interaction.options.getFocused()?.toLowerCase();
+
+    const choices = [
+      "hass",
+      "hmidriff",
+      "pgif",
+      "4k",
+      "hentai",
+      "holo",
+      "hneko",
+      "neko",
+      "hkitsune",
+      "kemonomimi",
+      "anal",
+      "hanal",
+      "gonewild",
+      "kanna",
+      "ass",
+      "pussy",
+      "thigh",
+      "hthigh",
+      "paizuri",
+      "tentacle",
+      "boobs",
+      "hboobs",
+      "yaoi",
+    ];
+    const filtered = choices.filter((choice) =>
+      choice?.toLowerCase().includes(focusedValue)
+    );
+
+    await interaction.respond(
+      filtered.map((choice) => ({ name: choice, value: choice }))
+    );
+  },
   async execute(interaction, client) {
     if (!interaction.channel.nsfw)
       return interaction.reply({
@@ -57,7 +70,7 @@ module.exports = {
           interaction.user.username
         } requested this.`
       )
-      .setColor(data.color)
+      .setColor(data.color ?? client.color)
       .setImage(data.url)
       .setFooter({
         text: client.user.tag,

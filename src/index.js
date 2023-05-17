@@ -9,6 +9,7 @@ const {
 } = require("discord.js");
 const { DisTube } = require("distube");
 const { SpotifyPlugin } = require("@distube/spotify");
+const config = require("../config.json");
 
 const connectToMongoDB = require("./utils/mongoDBConnect");
 
@@ -26,12 +27,14 @@ const client = new Client({
 
 const TOKEN = process.env.CLIENT_TOKEN;
 
-client.color = "#7d5fff";
+client.color = config.color;
 client.commands = new Collection();
 client.distube = new DisTube(client, {
-  emitNewSongOnly: true,
-  nsfw: false,
+  emitNewSongOnly: config.music.emitNewSongOnly ?? true,
+  nsfw: config.music.nsfw ?? false,
   plugins: [new SpotifyPlugin()],
+  leaveOnStop: config.music.leaveOnStop ?? false,
+  leaveOnEmpty: config.music.leaveOnEmpty ?? false,
 });
 
 client.distube.progressBar = require("./utils/progressBar.js");

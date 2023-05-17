@@ -1,5 +1,10 @@
 const { default: axios } = require("axios");
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  Interaction,
+  Client,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,17 +15,34 @@ module.exports = {
         .setName("animal_name")
         .setDescription("The name of the animal")
         .setRequired(true)
-        .addChoices(
-          { name: "Dog", value: "Dog" },
-          { name: "Cat", value: "Cat" },
-          { name: "Koala", value: "Koala" },
-          { name: "Panda", value: "Panda" },
-          { name: "Red panda", value: "Red panda" },
-          { name: "Bird", value: "Bird" },
-          { name: "Raccoon", value: "Raccoon" },
-          { name: "Kangaroo", value: "Kangaroo" }
-        )
+        .setAutocomplete(true)
     ),
+  /**
+   *
+   * @param {Interaction} interaction
+   * @param {Client} client
+   */
+  async autocomplete(interaction, client) {
+    const focusedValue = interaction.options.getFocused()?.toLowerCase();
+
+    const choices = [
+      "Dog",
+      "Cat",
+      "Koala",
+      "Panda",
+      "Red panda",
+      "Bird",
+      "Raccoon",
+      "Kangaroo",
+    ];
+    const filtered = choices.filter((choice) =>
+      choice?.toLowerCase().includes(focusedValue)
+    );
+
+    await interaction.respond(
+      filtered.map((choice) => ({ name: choice, value: choice }))
+    );
+  },
   async execute(interaction, client) {
     const animal_name = interaction.options
       .getString("animal_name")

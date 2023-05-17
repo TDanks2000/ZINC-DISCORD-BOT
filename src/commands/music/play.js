@@ -1,4 +1,6 @@
+const { Client, Interaction } = require("discord.js");
 const { SlashCommandBuilder } = require("discord.js");
+const yts = require("yt-search");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,7 +11,33 @@ module.exports = {
         .setName("song")
         .setDescription("The song you want to play")
         .setRequired(true)
+        .setAutocomplete(true)
     ),
+  /**
+   *
+   * @param {Interaction} interaction
+   * @param {Client} client
+   */
+  async autocomplete(interaction, client) {
+    const focusedValue = interaction.options.getFocused()?.toLowerCase();
+
+    if (focusedValue.startsWith("https://") || focusedValue?.length < 1) return;
+
+    let results = await yts(focusedValue).catch(() => null);
+
+    if (!results?.all) return;
+
+    results = results.videos?.slice(0, 25);
+
+    await interaction.respond(
+      results.map((choice) => ({
+        name: choice.title
+          ? choice.title.replace(/[^a-zA-Z ]/g, "")
+          : focusedValue,
+        value: choice.url,
+      }))
+    );
+  },
   async execute(interaction, client) {
     const song = interaction.options.getString("song");
     const queue = client.distube.getQueue(interaction.guildId);
