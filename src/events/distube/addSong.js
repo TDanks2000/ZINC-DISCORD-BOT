@@ -4,8 +4,6 @@ const chalk = require("chalk");
 module.exports = {
   name: "addSong",
   async execute(queue, song, client) {
-    console.log(queue.textChannel);
-
     const embed = new EmbedBuilder()
       .setAuthor({
         name: "Z!NC MUSIC | Added to queue",

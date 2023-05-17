@@ -19,24 +19,41 @@ module.exports = {
    * @param {Client} client
    */
   async autocomplete(interaction, client) {
-    const focusedValue = interaction.options.getFocused()?.toLowerCase();
+    try {
+      const focusedValue = interaction.options.getFocused()?.toLowerCase();
 
-    if (focusedValue.startsWith("https://") || focusedValue?.length < 1) return;
+      if (focusedValue.startsWith("https://") || focusedValue?.length < 1)
+        return await interaction.respond({
+          name: focusedValue,
+          value: focusedValue,
+        });
 
-    let results = await yts(focusedValue).catch(() => null);
+      let results = await yts(focusedValue).catch(() => null);
 
-    if (!results?.all || results?.all?.length < 1) return;
+      if (!results?.all || results?.all?.length < 1)
+        return await interaction.respond({
+          name: focusedValue,
+          value: focusedValue,
+        });
 
-    results = results.videos?.slice(0, 25);
+      results = results.videos?.slice(0, 25);
 
-    await interaction.respond(
-      results.map((choice) => ({
-        name: choice.title
-          ? choice.title.replace(/[^a-zA-Z ]/g, "")
-          : focusedValue,
-        value: choice.url,
-      }))
-    );
+      await interaction.respond(
+        results.map((choice) => ({
+          name:
+            choice?.title?.replace(/[^a-zA-Z ]/g, "")?.slice(0, 50) ??
+            focusedValue?.slice(0, 10),
+          value: choice?.url ?? focusedValue,
+        }))
+      );
+    } catch (error) {
+      console.log({
+        time: new Date().toLocaleString(),
+        command: "play",
+        type: "autocomplete",
+        error: error.message,
+      });
+    }
   },
   async execute(interaction, client) {
     const song = interaction.options.getString("song");

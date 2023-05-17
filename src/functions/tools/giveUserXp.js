@@ -16,9 +16,7 @@ module.exports = (client) => {
   client.giveUserXp = async (message) => {
     const id = `${message.guild.id}-${message.author.id}`;
 
-    console.log("no work");
     if (cooldowns.has(id)) return false;
-    console.log("work");
 
     const xpToGive = getRandomXp(5, 15);
 

@@ -29,8 +29,6 @@ module.exports = {
 
     const level = await Level.findOne(query);
 
-    console.log(member.presence);
-
     const rankCard = new canvacord.Rank()
       .setAvatar(member.user.displayAvatarURL({ dynamic: false }))
       .setCurrentXP(level?.xp ?? 0)
