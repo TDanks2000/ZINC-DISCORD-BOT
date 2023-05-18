@@ -28,11 +28,22 @@ module.exports = {
       (a, b) => b.level - a.level || b.xp - a.xp
     );
 
+    const userFind = sorted.find((item) => {
+      return item.userId === interaction.user.id;
+    });
+
+    const userPos = sorted.indexOf(userFind);
+
     const maxItems = 10;
 
     const embed = new EmbedBuilder()
       .setTitle(`Z!NC | ${interaction.guild.name}'s level leaderboard`)
-      .setDescription(await leaderboard(sorted, interaction))
+      .setDescription(
+        `${await leaderboard(
+          sorted,
+          interaction
+        )} \n\n You are currently position **${userPos + 1}**`
+      )
       .setColor(client.color)
       .setFooter({ text: `Requested by ${interaction.user.tag}` })
       .setTimestamp();
