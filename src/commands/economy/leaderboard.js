@@ -41,7 +41,8 @@ module.exports = {
       .setDescription(
         `${await leaderboard(
           sorted,
-          interaction
+          interaction,
+          maxItems
         )} \n\n You are currently position **${userPos + 1}**`
       )
       .setColor(client.color)
@@ -52,9 +53,9 @@ module.exports = {
   },
 };
 
-const leaderboard = async (items, interaction) => {
+const leaderboard = async (items, interaction, maxitems) => {
   const returnData = await Promise.all(
-    items.slice(0, 10).map(async (data, index) => {
+    items.slice(0, maxitems).map(async (data, index) => {
       const member = await interaction.guild.members.fetch(data.userId);
 
       return `**${index + 1}.** <@${member.user.id}> - Level: ${
