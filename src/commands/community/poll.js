@@ -49,11 +49,11 @@ module.exports = {
     const buttons = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("upvotePoll")
-        .setLabel("✅")
+        .setLabel("✅ YES")
         .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
         .setCustomId("downvotePoll")
-        .setLabel("❌")
+        .setLabel("❌ NO")
         .setStyle(ButtonStyle.Danger)
     );
 

@@ -50,12 +50,12 @@ module.exports = {
     const buttons = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("upvotePoll")
-        .setLabel("✅")
-        .setStyle(ButtonStyle.Secondary),
+        .setLabel("✅ YES")
+        .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
         .setCustomId("downvotePoll")
-        .setLabel("❌")
-        .setStyle(ButtonStyle.Secondary)
+        .setLabel("❌ NO")
+        .setStyle(ButtonStyle.Danger)
     );
 
     await interaction.update({
