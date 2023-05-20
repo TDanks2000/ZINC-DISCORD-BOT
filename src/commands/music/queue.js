@@ -21,7 +21,7 @@ module.exports = {
 
     const queueEmbed = new EmbedBuilder()
       .setAuthor({
-        name: "Z!NC MUSIC | QUEUE",
+        name: "K!TSUNE MUSIC | QUEUE",
         iconURL:
           "https://raw.githubusercontent.com/SudhanPlayz/Discord-MusicBot/master/assets/logo.gif",
       })

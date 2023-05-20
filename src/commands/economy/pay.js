@@ -4,17 +4,17 @@ const Balance = require("../../schemas/balance");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("pay")
-    .setDescription("Pay a user some zoins!")
+    .setDescription("Pay a user some Koins!")
     .addUserOption((option) =>
       option
         .setName("target")
-        .setDescription("The user to send the zoins to.")
+        .setDescription("The user to send the Koins to.")
         .setRequired(true)
     )
     .addNumberOption((option) =>
       option
         .setName("amount")
-        .setDescription("The amount of zoins to send.")
+        .setDescription("The amount of Koins to send.")
         .setRequired(true)
         .setMinValue(1)
     ),
@@ -29,19 +29,19 @@ module.exports = {
 
     if (selectedUser.bot || selectedUser.id === interaction.user.id)
       return interaction.reply({
-        content: "You can't send zoins to bots or yourself!",
+        content: "You can't send Koins to bots or yourself!",
         ephemeral: true,
       });
 
     if (amount < 1.0)
       return interaction.reply({
-        content: "You can't send less than 1 zoin!",
+        content: "You can't send less than 1 Koin!",
         ephemeral: true,
       });
 
     if (amount > userStoredBal.balance)
       return interaction.reply({
-        content: "You don't have enough zoins to send!",
+        content: "You don't have enough Koins to send!",
         ephemeral: true,
       });
 
@@ -74,8 +74,8 @@ module.exports = {
       );
 
       const embed = new EmbedBuilder()
-        .setTitle("Zoin sent!")
-        .setDescription(`You sent ${amount} zoins to ${selectedUser.tag}!`)
+        .setTitle("Koin sent!")
+        .setDescription(`You sent ${amount} Koins to ${selectedUser.tag}!`)
         .setColor("#7d5fff")
         .setFooter({
           text: client.user.tag,
@@ -86,7 +86,7 @@ module.exports = {
       return interaction.reply({ embeds: [embed], ephemeral: true });
     } catch (err) {
       console.log({
-        message: `[Z!NC pay] Error`,
+        message: `[K!TSUNE pay] Error`,
         error: err,
         level: "error",
       });

@@ -19,7 +19,7 @@ module.exports = {
     } else {
       const embed = new EmbedBuilder()
         .setTitle(`${user.username}'s Balance`)
-        .setDescription(`**Balance:** ${bal.balance} zoins.`)
+        .setDescription(`**Balance:** ${bal.balance} Koins.`)
         .setColor("#7d5fff")
         .setFooter({
           text: client.user.tag,

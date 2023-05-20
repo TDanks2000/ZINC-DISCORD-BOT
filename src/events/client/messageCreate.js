@@ -29,7 +29,7 @@ module.exports = {
       client.giveUserXp(message);
     } catch (err) {
       console.log({
-        message: `[Z!NC balance] Error`,
+        message: `[K!TSUNE balance] Error`,
         error: err,
         level: "error",
       });

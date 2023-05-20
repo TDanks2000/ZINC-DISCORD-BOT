@@ -6,7 +6,7 @@ module.exports = {
   async execute(queue, client) {
     const embed = new EmbedBuilder()
       .setAuthor({
-        name: "Z!NC MUSIC | Queue finished",
+        name: "K!TSUNE MUSIC | Queue finished",
         iconURL:
           "https://raw.githubusercontent.com/SudhanPlayz/Discord-MusicBot/master/assets/logo.gif",
       })

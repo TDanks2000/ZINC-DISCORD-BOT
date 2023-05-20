@@ -29,7 +29,7 @@ module.exports = (client) => {
     (async () => {
       try {
         console.log(
-          chalk.cyan(`[Z!NC] Started refreshing application (/) commands.`)
+          chalk.cyan(`[K!TSUNE] Started refreshing application (/) commands.`)
         );
 
         await rest.put(Routes.applicationCommands(clientId), {
@@ -37,7 +37,9 @@ module.exports = (client) => {
         });
 
         console.log(
-          chalk.green(`[Z!NC] Successfully reloaded application (/) commands.`)
+          chalk.green(
+            `[K!TSUNE] Successfully reloaded application (/) commands.`
+          )
         );
       } catch (error) {
         console.error(error);

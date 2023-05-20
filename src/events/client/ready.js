@@ -15,6 +15,6 @@ module.exports = {
       status: "dnd",
     });
 
-    console.log(chalk.green`[Z!NC] Ready! Logged in as ${client.user.tag}`);
+    console.log(chalk.green`[K!TSUNE] Ready! Logged in as ${client.user.tag}`);
   },
 };

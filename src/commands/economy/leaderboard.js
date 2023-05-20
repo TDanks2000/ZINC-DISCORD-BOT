@@ -37,7 +37,7 @@ module.exports = {
     const maxItems = 10;
 
     const embed = new EmbedBuilder()
-      .setTitle(`Z!NC | ${interaction.guild.name}'s level leaderboard`)
+      .setTitle(`K!TSUNE | ${interaction.guild.name}'s level leaderboard`)
       .setDescription(
         `${await leaderboard(
           sorted,
