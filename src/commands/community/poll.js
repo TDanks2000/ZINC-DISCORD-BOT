@@ -28,6 +28,11 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
+    await interaction.reply({
+      content: "Creating a poll",
+      ephemeral: true,
+    });
+
     const topic = await interaction.options.getString("topic");
 
     const embed = new EmbedBuilder()
@@ -45,11 +50,11 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("upvotePoll")
         .setLabel("✅")
-        .setStyle(ButtonStyle.Secondary),
+        .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
         .setCustomId("downvotePoll")
         .setLabel("❌")
-        .setStyle(ButtonStyle.Secondary)
+        .setStyle(ButtonStyle.Danger)
     );
 
     const msg = await interaction.channel.send({
