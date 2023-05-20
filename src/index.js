@@ -29,6 +29,8 @@ const TOKEN = process.env.CLIENT_TOKEN;
 
 client.color = config.color;
 client.commands = new Collection();
+client.buttons = new Collection();
+
 client.distube = new DisTube(client, {
   emitNewSongOnly: config.music.emitNewSongOnly ?? true,
   nsfw: config.music.nsfw ?? false,
@@ -57,6 +59,7 @@ const commandsFolders = fs.readdirSync("./src/commands");
 (async () => {
   await client.handleEvents(eventFiles, "./src/events");
   await client.handleCommands(commandsFolders, "./src/commands");
+  await client.handleComponents();
   await client.login(TOKEN);
 
   await connectToMongoDB();
