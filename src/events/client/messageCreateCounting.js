@@ -24,9 +24,12 @@ module.exports = {
     if (!data) return;
 
     const list = [
-      `Is stupid and ruined it at **${data.count}**`,
-      `What the *BEEP* you *BEEP* Ruined it at **${data.count}**`,
-      `has RUINED! RUINED! RUINED! it at  **${data.count}** `,
+      ` <USER> Is stupid and ruined it at **${data.count}**`,
+      `What the *BEEP* you *BEEP* <USER> Ruined it at **${data.count}**`,
+      `<USER> has RUINED! RUINED! RUINED! it at  **${data.count}** `,
+      `<USER> has RUINED it at **${data.count}**`,
+      `what where you thinking <USER>! you ruined it at **${data.count}**`,
+      `omg its all gone to *BEEP* we can't have anything nice omg, you have actually ruined all this hard work  <USER> at **${data.count}**`,
     ];
 
     if (message.channel.id === data.channel) {
@@ -35,7 +38,9 @@ module.exports = {
         message.content < data.count ||
         message.content > data.count
       ) {
-        const randomItem = list[Math.floor(Math.random() * list.length)];
+        const randomItem = list[
+          Math.floor(Math.random() * list.length)
+        ].replace("<USER>", `<@${message.author.id}>`);
 
         data.count = 1;
         data.lastPerson = "";
@@ -44,7 +49,7 @@ module.exports = {
         const embed = new EmbedBuilder()
           .setTitle("Counting")
           .setColor("Red")
-          .setDescription(`<@${message.author.id}> ${randomItem}`)
+          .setDescription(randomItem)
           .setTimestamp();
 
         const msg = await message.channel.send({ embeds: [embed] });
