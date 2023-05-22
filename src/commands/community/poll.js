@@ -6,6 +6,7 @@ const {
   ButtonStyle,
   ButtonBuilder,
   ActionRowBuilder,
+  PermissionFlagsBits,
 } = require("discord.js");
 
 const pollSchema = require("../../schemas/votes");
@@ -14,6 +15,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("poll")
     .setDescription("creates a poll")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addStringOption((option) =>
       option
         .setName("topic")

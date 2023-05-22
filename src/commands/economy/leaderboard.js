@@ -15,7 +15,12 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    const levelData = await Level.find({ guildId: interaction.guild.id });
+    const levelData = await Level.find({ guildId: interaction.guild.id })
+      .sort({
+        xp: -1,
+        level: -1,
+      })
+      .limit(10);
 
     if (!levelData || !levelData.length)
       return await interaction.reply({
@@ -23,33 +28,27 @@ module.exports = {
         ephemeral: true,
       });
 
-    // sort levelData by level
-    let sorted = await levelData.sort(
-      (a, b) => b.level - a.level || b.xp - a.xp
-    );
-
-    const userFind = sorted.find((item) => {
-      return item.userId === interaction.user.id;
-    });
-
-    const userPos = sorted.indexOf(userFind);
-
-    const maxItems = 10;
+    await interaction.deferReply();
 
     const embed = new EmbedBuilder()
       .setTitle(`K!TSUNE | ${interaction.guild.name}'s level leaderboard`)
-      .setDescription(
-        `${await leaderboard(
-          sorted,
-          interaction,
-          maxItems
-        )} \n\n You are currently position **${userPos + 1}**`
-      )
       .setColor(client.color)
       .setFooter({ text: `Requested by ${interaction.user.tag}` })
       .setTimestamp();
 
-    return await interaction.reply({ embeds: [embed] });
+    let text = "";
+    for (let c = 0; c < levelData.length; c++) {
+      let { userId, xp, level } = levelData[c];
+      const value = await interaction.guild.members.fetch(userId);
+
+      let member = `${value.user.username}#${value.user.discriminator}`;
+
+      text += `${c + 1}. ${member} | XP: ${xp} | Level: ${level} \n`;
+    }
+
+    embed.setDescription(`\`\`\`${text}\`\`\``);
+
+    return await interaction.editReply({ embeds: [embed] });
   },
 };
 

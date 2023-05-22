@@ -19,15 +19,15 @@ dependencies:
   '@distube/ytdl-core':
     specifier: ^4.11.9
     version: 4.11.9
+  '@tdanks2000/fancyconsolelog':
+    specifier: ^0.0.3
+    version: 0.0.3
   axios:
     specifier: ^1.4.0
     version: 1.4.0
   canvacord:
     specifier: ^5.4.9
     version: 5.4.9
-  chalk:
-    specifier: 4.1.0
-    version: 4.1.0
   dayjs:
     specifier: ^1.11.7
     version: 1.11.7
@@ -345,6 +345,13 @@ packages:
     engines: {node: '>=v14.18.0', npm: '>=7.24.2'}
     dependencies:
       tslib: 2.5.0
+    dev: false
+
+  /@tdanks2000/fancyconsolelog@0.0.3:
+    resolution: {integrity: sha512-yvIUa6njlOFg/dU90CW07H5z00tv94l5V7dZMgOcWdcC6u4MJrkf6+pDzA3myci2oTaH+lhF3Fp3mlEy0e1F+w==}
+    dependencies:
+      chalk: 4.1.0
+      dayjs: 1.11.7
     dev: false
 
   /@tokenizer/token@0.3.0:
