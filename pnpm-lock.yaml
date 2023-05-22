@@ -28,6 +28,9 @@ dependencies:
   canvacord:
     specifier: ^5.4.9
     version: 5.4.9
+  chalk:
+    specifier: 4.1.0
+    version: 4.1.0
   dayjs:
     specifier: ^1.11.7
     version: 1.11.7
